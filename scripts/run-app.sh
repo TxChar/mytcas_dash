@@ -1,0 +1,1 @@
+python3 ./dashapp/app.py
