@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "mytcas_dash"
+version = "0.1.0"
+description = ""
+authors = ["Jaturawich Khochun <jaturawich2002@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+dash = "^2.17.1"
+pandas = "^2.2.2"
+
+
+httpx = "^0.27.0"
+dash-bootstrap-components = "^1.6.0"
+plotly = "^5.22.0"
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+mytcas_dash = "mytcas_dash.cmd.dashapp:main"
