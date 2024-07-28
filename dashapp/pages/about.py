@@ -202,7 +202,7 @@ layout = html.Div(
                                                 },
                                                 target="_blank",
                                             ),
-                                        )
+                                        ),
                                     ],
                                     className="mb-4",
                                 ),
@@ -212,7 +212,7 @@ layout = html.Div(
                         style={"marginTop": 20, "Align": "center"},
                     ),
                 ],
-                style={"backgroundColor": "#B33939", "border-radius": "18px"},
+                style={"backgroundColor": "#1A477F", "border-radius": "18px"},
             ),
         ),
     ]

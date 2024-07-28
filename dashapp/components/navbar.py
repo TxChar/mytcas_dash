@@ -14,7 +14,7 @@ def Navbar():
                             color="light",
                             className="ms-2",
                             n_clicks=0,
-                            href="/"
+                            href="/",
                         )
                     ),
                     dbc.NavItem(
@@ -24,14 +24,14 @@ def Navbar():
                             color="light",
                             className="ms-2",
                             n_clicks=0,
-                            href="/about"
+                            href="/about",
                         )
                     ),
                 ],
                 brand="MyTCAS Dashboard",
                 brand_style={"fontSize": 32},
                 brand_href="/",
-                color="#B33939",
+                color="#1A477F",
                 dark=True,
             ),
         ]

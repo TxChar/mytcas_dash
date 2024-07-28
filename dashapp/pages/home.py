@@ -6,7 +6,7 @@ from dash import dcc, html
 
 # เตรียมข้อมูล
 df = universities_data()
- 
+
 # สร้าง dropdown options
 dropdown_options = [
     {"label": str(universities), "value": universities}
@@ -14,8 +14,7 @@ dropdown_options = [
 ]
 
 majors_dropdown_options = [
-    {"label": str(major), "value": major}
-    for major in df["คณะ"].unique()
+    {"label": str(major), "value": major} for major in df["คณะ"].unique()
 ]
 
 card_content = [
@@ -66,9 +65,7 @@ layout = html.Div(
                                         options=majors_dropdown_options,
                                         placeholder="คณะ...",
                                         multi=True,
-                                        style={
-                                            "color": "black", "marginTop": "10px"
-                                        },
+                                        style={"color": "black", "marginTop": "10px"},
                                     ),
                                 ]
                             ),
@@ -77,7 +74,7 @@ layout = html.Div(
                         style={"marginTop": 20, "Align": "center"},
                     ),
                 ],
-                style={"backgroundColor": "#B33939", "border-radius": "20px"},
+                style={"backgroundColor": "#1A477F", "border-radius": "20px"},
             ),
         ),
         # Display Card
@@ -128,7 +125,11 @@ layout = html.Div(
                         style={"marginTop": 20, "Align": "center"},
                     ),
                 ],
-                style={"backgroundColor": "#B33939", "border-radius": "20px", "paddingBottom": 1},
+                style={
+                    "backgroundColor": "#1A477F",
+                    "border-radius": "20px",
+                    "paddingBottom": 1,
+                },
             ),
         ),
         # Table
@@ -156,7 +157,7 @@ layout = html.Div(
                         style={"marginTop": 20, "Align": "center"},
                     ),
                 ],
-                style={"backgroundColor": "#B33939", "border-radius": "20px"},
+                style={"backgroundColor": "#1A477F", "border-radius": "20px"},
             ),
         ),
         Footer(),
