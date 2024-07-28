@@ -9,23 +9,22 @@ def Navbar():
                 children=[
                     dbc.NavItem(
                         dbc.Button(
-                            dbc.NavLink("หน้าหลัก", href="/"),
+                            dbc.NavLink("หน้าหลัก"),
                             outline=True,
                             color="light",
                             className="ms-2",
                             n_clicks=0,
+                            href="/"
                         )
                     ),
                     dbc.NavItem(
                         dbc.Button(
-                            dbc.NavLink(
-                                "เกี่ยวกับ",
-                                href="/about",
-                            ),
+                            dbc.NavLink("เกี่ยวกับ"),
                             outline=True,
                             color="light",
                             className="ms-2",
                             n_clicks=0,
+                            href="/about"
                         )
                     ),
                 ],
