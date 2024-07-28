@@ -117,14 +117,13 @@ layout = html.Div(
                                         ],
                                         className="mb-4",
                                     ),
-                                ]
+                                ],
                             ),
-                            html.Br(),
                         ],
                         style={"marginTop": 20, "Align": "center"},
                     ),
                 ],
-                style={"backgroundColor": "#B33939", "border-radius": "20px"},
+                style={"backgroundColor": "#B33939", "border-radius": "20px", "paddingBottom": 1},
             ),
         ),
         # Table
