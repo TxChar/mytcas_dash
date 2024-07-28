@@ -60,7 +60,7 @@ layout = html.Div(
                                         ),
                                         dbc.Row(
                                             html.Div(
-                                                "นักศึกษาปริญญาตรี วิศวกรรมศาสตร์ปัญญาประดิษฐ์",
+                                                "นักศึกษาปริญญาตรี วิศวกรรมปัญญาประดิษฐ์",
                                                 style={
                                                     "color": "white",
                                                     "fontSize": "18px",
@@ -119,6 +119,90 @@ layout = html.Div(
                                                 target="_blank",
                                             ),
                                         ),
+                                    ],
+                                    className="mb-4",
+                                ),
+                            ),
+                            html.Br(),
+                        ],
+                        style={"marginTop": 20, "Align": "center"},
+                    ),
+                    dbc.Container(
+                        [
+                            dbc.Container(
+                                dbc.Row(
+                                    [
+                                        dbc.Row(
+                                            html.Div(
+                                                "พชรวุธ ธนาวุฒิ",
+                                                style={
+                                                    "color": "white",
+                                                    "fontSize": "18px",
+                                                    "text-align": "center",
+                                                },
+                                            ),
+                                        ),
+                                        dbc.Row(
+                                            html.Div(
+                                                "นักศึกษาปริญญาตรี วิศวกรรมปัญญาประดิษฐ์",
+                                                style={
+                                                    "color": "white",
+                                                    "fontSize": "18px",
+                                                    "text-align": "center",
+                                                },
+                                            ),
+                                        ),
+                                        dbc.Row(
+                                            html.Div(
+                                                "มหาวิทยาลัยสงขลานครินทร์ วิทยาเขตหาดใหญ่",
+                                                style={
+                                                    "color": "white",
+                                                    "fontSize": "18px",
+                                                    "text-align": "center",
+                                                },
+                                            ),
+                                        ),
+                                    ],
+                                    className="mb-4",
+                                ),
+                            ),
+                            html.Br(),
+                            dbc.Container(
+                                dbc.Row(
+                                    [
+                                        dbc.Row(
+                                            html.A(
+                                                "GITHUB - babebp",
+                                                href="https://github.com/babebp",
+                                                style={
+                                                    "color": "white",
+                                                    "fontSize": "18px",
+                                                },
+                                                target="_blank",
+                                            ),
+                                        ),
+                                        dbc.Row(
+                                            html.A(
+                                                "MEDIUM - babebp",
+                                                href="https://medium.com/@babebp",
+                                                style={
+                                                    "color": "white",
+                                                    "fontSize": "18px",
+                                                },
+                                                target="_blank",
+                                            ),
+                                        ),
+                                        dbc.Row(
+                                            html.A(
+                                                "LINKEDIN - Pacharawut Thanawut",
+                                                href="https://www.linkedin.com/in/babebp/",
+                                                style={
+                                                    "color": "white",
+                                                    "fontSize": "18px",
+                                                },
+                                                target="_blank",
+                                            ),
+                                        )
                                     ],
                                     className="mb-4",
                                 ),

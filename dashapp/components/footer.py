@@ -14,7 +14,7 @@ def Footer():
         html.Footer(
             dbc.Col(
                 [
-                    dbc.Col(html.Div("DEVELOPED BY JATURAWICH KHOCHUN")),
+                    dbc.Col(html.Div("DEVELOPED BY JATURAWICH KHOCHUN | PACHARAWUT THANAWUT")),
                     dbc.Col(html.Div("AIE STUDENT AT PSU")),
                 ],
                 style={"marginLeft": "1%", "color": "white"},
