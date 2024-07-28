@@ -140,6 +140,34 @@ layout = html.Div(
                 },
             ),
         ),
+        # MAP
+        dbc.Container(
+            dbc.Container(
+                [
+                    html.Hr(),
+                    dbc.Col(
+                        [
+                            html.H4(
+                                "แผนที่", style={"color": "white", "marginLeft": "20px"}
+                            )
+                        ]
+                    ),
+                    html.Hr(),
+                    dbc.Container(
+                        [
+                            dbc.Container(
+                                [
+                                    # html.Div(id="output-map"),
+                                ]
+                            ),
+                            html.Br(),
+                        ],
+                        style={"marginTop": 20, "Align": "center"},
+                    ),
+                ],
+                style={"backgroundColor": "#024070", "border-radius": "20px"},
+            ),
+        ),
         # Table
         dbc.Container(
             dbc.Container(
