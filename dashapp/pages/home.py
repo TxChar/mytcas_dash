@@ -6,7 +6,7 @@ from dash import dcc, html
 
 # เตรียมข้อมูล
 df = universities_data()
-
+ 
 # สร้าง dropdown options
 dropdown_options = [
     {"label": str(universities), "value": universities}
@@ -50,11 +50,20 @@ layout = html.Div(
                                     dcc.Dropdown(
                                         id="universities-dropdown",
                                         options=dropdown_options,
-                                        placeholder="ทุกมหาวิทยาลัย",
+                                        placeholder="มหาวิทยาลัย...",
                                         multi=True,
                                         style={
                                             "color": "black",
                                         },
+                                    ),
+                                    dcc.Dropdown(
+                                        id="major-dropdown",
+                                        placeholder="คณะ...",
+                                        multi=True,
+                                        style={
+                                            "color": "black", "marginTop": "10px"
+                                        },
+                                        disabled=True
                                     ),
                                 ]
                             ),

@@ -7,14 +7,18 @@ import plotly
 
 def table_slection(app):
     @app.callback(
-        Output("output-table", "children"), [Input("universities-dropdown", "value")]
+        Output("output-table", "children"), 
+        [Input("universities-dropdown", "value"),
+         Input("major-dropdown", "value")]
     )
-    def update_table(selected_universities):
+    def update_table(selected_universities, selected_major):
         df = universities_data()
         # df = (universities_data()).drop(["pp3year", "level"], axis=1)
 
         if selected_universities:
             df = df[df["มหาวิทยาลัย"].isin(selected_universities)]
+            if selected_major:
+                df = df[df['คณะ'].isin(selected_major)]
 
         df = df.rename(
             columns={
@@ -63,14 +67,17 @@ def summarization_students(app):
             Output("third-card", "children"),
             Output("fourth-card", "children"),
         ],
-        [Input("universities-dropdown", "value")],
+        [Input("universities-dropdown", "value"),
+         Input("major-dropdown", "value")],
     )
-    def update_table(selected_universities):
+    def update_table(selected_universities, selected_major):
         df = universities_data()
 
         if selected_universities:
-            df = df[df["คณะ"].isin(selected_universities)]
-
+            df = df[df["มหาวิทยาลัย"].isin(selected_universities)]
+            if selected_major:
+                df = df[df['คณะ'].isin(selected_major)]
+                
         df = df.rename(
             columns={
                 "รอบ 1 Portfolio": "รอบ 1",
@@ -128,6 +135,25 @@ def summarization_students(app):
         return (first_card, second_card, third_card, fourth_card)
 
 
+def select_majors_options(app):
+    @app.callback(
+        Output('major-dropdown', 'options'),
+        Output('major-dropdown', 'disabled'),
+        [Input('universities-dropdown', 'value')]
+    )
+    def set_majors_options(selected_university):
+        if selected_university:
+            df = universities_data()
+
+            filtered_df = df[df['มหาวิทยาลัย'].isin(selected_university)]
+
+            majors = filtered_df['คณะ'].unique()
+
+            major_options = [{'label': major, 'value': major} for major in majors]
+            return major_options, False  # Enable the major dropdown
+        return [], True  # Disable the dropdown if no university is selected 
+
 def register_callbacks(app):
     table_slection(app)
     summarization_students(app)
+    select_majors_options(app)
