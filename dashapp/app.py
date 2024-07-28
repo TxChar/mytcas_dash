@@ -1,10 +1,10 @@
 import dash_bootstrap_components as dbc
 
-# from callbacks.callbacks import register_callbacks
+from callbacks.callbacks import register_callbacks
 from dash import Dash, dcc, html
 from dash.dependencies import Input, Output
 
-# from pages import home, about
+from pages import home, about
 
 app = Dash(
     __name__,
@@ -23,14 +23,13 @@ app.layout = html.Div(
 
 @app.callback(Output("page-content", "children"), [Input("url", "pathname")])
 def display_page(pathname):
-    pass
-    # if pathname == "/about":
-    #     return about.layout
-    # else:
-    #     return home.layout
+    if pathname == "/about":
+        return about.layout
+    else:
+        return home.layout
 
 
 if __name__ == "__main__":
     server = app.server
-    # register_callbacks(app)
+    register_callbacks(app)
     app.run_server(debug=True)
