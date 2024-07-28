@@ -5,11 +5,57 @@ import dash_bootstrap_components as dbc
 import plotly
 
 
+# def map_selection(app):
+#     @app.callback(
+#         Output("output-map", "children"), [Input("provinces-dropdown", "value")]
+#     )
+#     def update_map(selected_province):
+#         df_merge_locations = provinces_location()
+#         df_merge_locations.columns = df_merge_locations.columns.str.strip()
+
+#         if selected_province:
+#             df_merge_locations = df_merge_locations[
+#                 df_merge_locations["schools_province"].isin(selected_province)
+#             ]
+
+#         df_merge_locations = df_merge_locations.rename(
+#             columns={
+#                 "latitude": "ละติจูด",
+#                 "longitude": "ลองจิจูด",
+#                 "level": "ระดับการศึกษา",
+#                 "schools_province": "จังหวัด",
+#                 "totalmale": "จำนวนผู้ชาย",
+#                 "totalfemale": "จำนวนผู้หญิง",
+#                 "totalstd": "จำนวนทั้งหมด",
+#             }
+#         )
+
+#         fig = plotly.express.scatter_mapbox(
+#             df_merge_locations,
+#             lat="ละติจูด",
+#             lon="ลองจิจูด",
+#             hover_name="จังหวัด",
+#             hover_data=["จำนวนผู้ชาย", "จำนวนผู้หญิง", "จำนวนทั้งหมด"],
+#             center=dict(lat=13.736717, lon=100.523186),
+#             color="จำนวนทั้งหมด",
+#             size="จำนวนทั้งหมด",
+#             color_continuous_scale=plotly.express.colors.sequential.Rainbow,
+#             size_max=30,
+#             zoom=5,
+#             height=750,
+#         )
+#         fig.update_layout(
+#             margin={"r": 0, "t": 0, "l": 0, "b": 0}, mapbox_style="open-street-map"
+#         )
+
+#         fig = dcc.Graph(figure=fig)
+#         return fig
+
+
 def table_slection(app):
     @app.callback(
-        Output("output-table", "children"), 
-        [Input("universities-dropdown", "value"),
-         Input("major-dropdown", "value")]
+        Output("output-table", "children"),
+        [Input("universities-dropdown", "value"), Input("major-dropdown", "value")],
     )
     def update_table(selected_universities, selected_major):
         df = universities_data()
@@ -17,9 +63,9 @@ def table_slection(app):
 
         if selected_universities:
             df = df[df["มหาวิทยาลัย"].isin(selected_universities)]
-            
+
         if selected_major:
-                df = df[df['คณะ'].isin(selected_major)]
+            df = df[df["คณะ"].isin(selected_major)]
 
         df = df.rename(
             columns={
@@ -68,18 +114,17 @@ def summarization_students(app):
             Output("third-card", "children"),
             Output("fourth-card", "children"),
         ],
-        [Input("universities-dropdown", "value"),
-         Input("major-dropdown", "value")],
+        [Input("universities-dropdown", "value"), Input("major-dropdown", "value")],
     )
     def update_table(selected_universities, selected_major):
         df = universities_data()
 
         if selected_universities:
             df = df[df["มหาวิทยาลัย"].isin(selected_universities)]
-            
+
         if selected_major:
-                df = df[df['คณะ'].isin(selected_major)]
-                
+            df = df[df["คณะ"].isin(selected_major)]
+
         df = df.rename(
             columns={
                 "รอบ 1 Portfolio": "รอบ 1",
@@ -93,10 +138,6 @@ def summarization_students(app):
         second_total = df["รอบ 2"].sum()
         third_total = df["รอบ 3"].sum()
         fourth_total = df["รอบ 4"].sum()
-        # print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>..")
-        # print(df["รอบ 1"].dtypes)
-        # print(first_total)
-        # print(second_total)
 
         first_card = [
             dbc.CardHeader("รอบที่1 Portfolio"),
