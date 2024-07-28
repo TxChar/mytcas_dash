@@ -91,28 +91,36 @@ layout = html.Div(
                                             dbc.Col(
                                                 dbc.Card(
                                                     id="first-card",
-                                                    color="primary",
+                                                    style={
+                                                        "backgroundColor": "#F3B51B"
+                                                    },
                                                     inverse=True,
                                                 )
                                             ),
                                             dbc.Col(
                                                 dbc.Card(
                                                     id="second-card",
-                                                    color="danger",
+                                                    style={
+                                                        "backgroundColor": "#E66955"
+                                                    },
                                                     inverse=True,
                                                 )
                                             ),
                                             dbc.Col(
                                                 dbc.Card(
                                                     id="third-card",
-                                                    color="success",
+                                                    style={
+                                                        "backgroundColor": "#52A1A9"
+                                                    },
                                                     inverse=True,
                                                 )
                                             ),
                                             dbc.Col(
                                                 dbc.Card(
                                                     id="fourth-card",
-                                                    color="success",
+                                                    style={
+                                                        "backgroundColor": "#31719A"
+                                                    },
                                                     inverse=True,
                                                 )
                                             ),
