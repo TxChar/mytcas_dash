@@ -13,6 +13,11 @@ dropdown_options = [
     for universities in df["มหาวิทยาลัย"].drop_duplicates()
 ]
 
+majors_dropdown_options = [
+    {"label": str(major), "value": major}
+    for major in df["คณะ"].unique()
+]
+
 card_content = [
     dbc.CardHeader("Card header"),
     dbc.CardBody(
@@ -58,12 +63,12 @@ layout = html.Div(
                                     ),
                                     dcc.Dropdown(
                                         id="major-dropdown",
+                                        options=majors_dropdown_options,
                                         placeholder="คณะ...",
                                         multi=True,
                                         style={
                                             "color": "black", "marginTop": "10px"
                                         },
-                                        disabled=True
                                     ),
                                 ]
                             ),
