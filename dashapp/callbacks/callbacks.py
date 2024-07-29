@@ -1,4 +1,4 @@
-from callbacks.api import graduated_api, provinces_location, universities_data
+from callbacks.api import universities_data
 from dash.dependencies import Input, Output
 from dash import Input, Output, dash_table, dcc, html
 import dash_bootstrap_components as dbc
@@ -11,21 +11,23 @@ def map_selection(app):
         [Input("universities-dropdown", "value"), 
          Input("major-dropdown", "value")]
     )
-    def update_map(selected_province, selected_major):
+    def update_map(selected_universities, selected_majors):
         df = universities_data()
         
-        if selected_province:
-            df = df[df["มหาวิทยาลัย"].isin(selected_province)]
+        if selected_universities:
+            df = df[df["มหาวิทยาลัย"].isin(selected_universities)]
             
-        if selected_major:
-            df = df[df["คณะ"].isin(selected_major)]
+        if selected_majors:
+            df = df[df["คณะ"].isin(selected_majors)]
 
+        # Get total number 
         df['total'] = df['รอบ 1 Portfolio'] + df['รอบ 2 Quota'] + df['รอบ 3 Admission'] + df['รอบ 4 Direct Admission']
-        
         df2 = df.groupby(['มหาวิทยาลัย']).sum()['total'].to_frame().reset_index()
         df = df.merge(df2, how='inner', on='มหาวิทยาลัย')
         
-        df = df.rename(columns={"total_y": "จำนวนนักศึกษาที่รับ"})
+        # Rename columns
+        df = df.rename(columns={
+            "total_y": "จำนวนนักศึกษาที่รับ"})
         
         
         fig = plotly.express.scatter_mapbox(
@@ -55,15 +57,15 @@ def table_slection(app):
         Output("output-table", "children"),
         [Input("universities-dropdown", "value"), Input("major-dropdown", "value")],
     )
-    def update_table(selected_universities, selected_major):
+    def update_table(selected_universities, selected_majors):
         df = universities_data()
         # df = (universities_data()).drop(["pp3year", "level"], axis=1)
 
         if selected_universities:
             df = df[df["มหาวิทยาลัย"].isin(selected_universities)]
 
-        if selected_major:
-            df = df[df["คณะ"].isin(selected_major)]
+        if selected_majors:
+            df = df[df["คณะ"].isin(selected_majors)]
 
         df = df.rename(
             columns={
@@ -114,14 +116,14 @@ def summarization_students(app):
         ],
         [Input("universities-dropdown", "value"), Input("major-dropdown", "value")],
     )
-    def update_table(selected_universities, selected_major):
+    def update_table(selected_universities, selected_majors):
         df = universities_data()
 
         if selected_universities:
             df = df[df["มหาวิทยาลัย"].isin(selected_universities)]
 
-        if selected_major:
-            df = df[df["คณะ"].isin(selected_major)]
+        if selected_majors:
+            df = df[df["คณะ"].isin(selected_majors)]
 
         df = df.rename(
             columns={
