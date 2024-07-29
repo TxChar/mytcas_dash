@@ -157,7 +157,7 @@ layout = html.Div(
                         [
                             dbc.Container(
                                 [
-                                    # html.Div(id="output-map"),
+                                    html.Div(id="output-map"),
                                 ]
                             ),
                             html.Br(),

@@ -5,51 +5,44 @@ import dash_bootstrap_components as dbc
 import plotly
 
 
-# def map_selection(app):
-#     @app.callback(
-#         Output("output-map", "children"), [Input("provinces-dropdown", "value")]
-#     )
-#     def update_map(selected_province):
-#         df_merge_locations = provinces_location()
-#         df_merge_locations.columns = df_merge_locations.columns.str.strip()
+def map_selection(app):
+    @app.callback(
+        Output("output-map", "children"), [Input("universities-dropdown", "value")]
+    )
+    def update_map(selected_province):
+        df = universities_data()
+        
+        if selected_province:
+            df = df[df["มหาวิทยาลัย"].isin(selected_province)]
 
-#         if selected_province:
-#             df_merge_locations = df_merge_locations[
-#                 df_merge_locations["schools_province"].isin(selected_province)
-#             ]
+        df['total'] = df['รอบ 1 Portfolio'] + df['รอบ 2 Quota'] + df['รอบ 3 Admission'] + df['รอบ 4 Direct Admission']
+        
+        df2 = df.groupby(['มหาวิทยาลัย']).sum()['total'].to_frame().reset_index()
+        df = df.merge(df2, how='inner', on='มหาวิทยาลัย')
+        
+        df = df.rename(columns={"total_y": "จำนวนนักศึกษาที่รับ"})
+        
+        
+        fig = plotly.express.scatter_mapbox(
+            df,
+            lat="ละติจูด",
+            lon="ลองจิจูด",
+            hover_name="มหาวิทยาลัย",
+            # hover_data=["รอบ 1 Portfolio", "รอบ 2 Quota", "รอบ 3 Admission", "รอบ 4 Direct Admission"],
+            center=dict(lat=13.736717, lon=100.523186),
+            color="จำนวนนักศึกษาที่รับ",
+            size="จำนวนนักศึกษาที่รับ",
+            color_continuous_scale=plotly.express.colors.sequential.Rainbow,
+            size_max=30,
+            zoom=5,
+            height=750,
+        )
+        fig.update_layout(
+            margin={"r": 0, "t": 0, "l": 0, "b": 0}, mapbox_style="open-street-map"
+        )
 
-#         df_merge_locations = df_merge_locations.rename(
-#             columns={
-#                 "latitude": "ละติจูด",
-#                 "longitude": "ลองจิจูด",
-#                 "level": "ระดับการศึกษา",
-#                 "schools_province": "จังหวัด",
-#                 "totalmale": "จำนวนผู้ชาย",
-#                 "totalfemale": "จำนวนผู้หญิง",
-#                 "totalstd": "จำนวนทั้งหมด",
-#             }
-#         )
-
-#         fig = plotly.express.scatter_mapbox(
-#             df_merge_locations,
-#             lat="ละติจูด",
-#             lon="ลองจิจูด",
-#             hover_name="จังหวัด",
-#             hover_data=["จำนวนผู้ชาย", "จำนวนผู้หญิง", "จำนวนทั้งหมด"],
-#             center=dict(lat=13.736717, lon=100.523186),
-#             color="จำนวนทั้งหมด",
-#             size="จำนวนทั้งหมด",
-#             color_continuous_scale=plotly.express.colors.sequential.Rainbow,
-#             size_max=30,
-#             zoom=5,
-#             height=750,
-#         )
-#         fig.update_layout(
-#             margin={"r": 0, "t": 0, "l": 0, "b": 0}, mapbox_style="open-street-map"
-#         )
-
-#         fig = dcc.Graph(figure=fig)
-#         return fig
+        fig = dcc.Graph(figure=fig)
+        return fig
 
 
 def table_slection(app):
@@ -181,3 +174,4 @@ def summarization_students(app):
 def register_callbacks(app):
     table_slection(app)
     summarization_students(app)
+    map_selection(app)
