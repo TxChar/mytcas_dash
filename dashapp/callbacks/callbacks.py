@@ -7,13 +7,18 @@ import plotly
 
 def map_selection(app):
     @app.callback(
-        Output("output-map", "children"), [Input("universities-dropdown", "value")]
+        Output("output-map", "children"), 
+        [Input("universities-dropdown", "value"), 
+         Input("major-dropdown", "value")]
     )
-    def update_map(selected_province):
+    def update_map(selected_province, selected_major):
         df = universities_data()
         
         if selected_province:
             df = df[df["มหาวิทยาลัย"].isin(selected_province)]
+            
+        if selected_major:
+            df = df[df["คณะ"].isin(selected_major)]
 
         df['total'] = df['รอบ 1 Portfolio'] + df['รอบ 2 Quota'] + df['รอบ 3 Admission'] + df['รอบ 4 Direct Admission']
         
