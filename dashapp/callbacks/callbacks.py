@@ -7,29 +7,31 @@ import plotly
 
 def map_selection(app):
     @app.callback(
-        Output("output-map", "children"), 
-        [Input("universities-dropdown", "value"), 
-         Input("major-dropdown", "value")]
+        Output("output-map", "children"),
+        [Input("universities-dropdown", "value"), Input("major-dropdown", "value")],
     )
     def update_map(selected_universities, selected_majors):
         df = universities_data()
-        
+
         if selected_universities:
             df = df[df["มหาวิทยาลัย"].isin(selected_universities)]
-            
+
         if selected_majors:
             df = df[df["คณะ"].isin(selected_majors)]
 
-        # Get total number 
-        df['total'] = df['รอบ 1 Portfolio'] + df['รอบ 2 Quota'] + df['รอบ 3 Admission'] + df['รอบ 4 Direct Admission']
-        df2 = df.groupby(['มหาวิทยาลัย']).sum()['total'].to_frame().reset_index()
-        df = df.merge(df2, how='inner', on='มหาวิทยาลัย')
-        
+        # Get total number
+        df["total"] = (
+            df["รอบ 1 Portfolio"]
+            + df["รอบ 2 Quota"]
+            + df["รอบ 3 Admission"]
+            + df["รอบ 4 Direct Admission"]
+        )
+        df2 = df.groupby(["มหาวิทยาลัย"]).sum()["total"].to_frame().reset_index()
+        df = df.merge(df2, how="inner", on="มหาวิทยาลัย")
+
         # Rename columns
-        df = df.rename(columns={
-            "total_y": "จำนวนนักศึกษาที่รับ"})
-        
-        
+        df = df.rename(columns={"total_y": "จำนวนนักศึกษาที่รับ"})
+
         fig = plotly.express.scatter_mapbox(
             df,
             lat="ละติจูด",
@@ -88,6 +90,9 @@ def table_slection(app):
         universities_table = dash_table.DataTable(
             columns=[{"name": col, "id": col} for col in universities_df.columns],
             data=df.to_dict("records"),
+            page_current=0,  # Page number
+            page_size=15,  # Number of rows per page
+            page_action="native",  # Enable pagination
             style_header={
                 "color": "black",
                 "fontWeight": "bold",
