@@ -5,7 +5,7 @@ import plotly.express as px
 
 
 def universities_data():
-    df = pandas.read_csv("dashapp/assets/universities_data.csv")
+    df = pandas.read_csv("data\cleaned_universities_data.csv")
 
     df[
         ["รอบ 1 Portfolio", "รอบ 2 Quota", "รอบ 3 Admission", "รอบ 4 Direct Admission"]
